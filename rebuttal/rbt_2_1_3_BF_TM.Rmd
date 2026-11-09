@@ -227,7 +227,7 @@ mcsa_CRdf_2yrs %>%
     values_to = "value"
   ) %>%
   mutate(name = factor(name, levels = c("Res_X.CL_Y.Mem", "Res_X.CL_Y.LMDR", "Res_X.Age_Y.Mem", "Res_X.Age_Y.LMDR")),
-         Cohort = factor(Cohort, levels = c("MCSA"), "ADNI")) %>% 
+         Cohort = factor(Cohort, levels = c("MCSA", "ADNI"))) %>% 
   group_by(name, Cohort) %>%
   summarise(
     'Resilient'  = sum(value == "Resilient", na.rm = TRUE),
