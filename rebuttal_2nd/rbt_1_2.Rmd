@@ -38,7 +38,7 @@ rosmap_id <- read_delim(paste0(indir,"/ROSMAP_id_map.txt"), delim = "\t") %>% mu
 
 # Get cognitive scores, global pathology and education from RADC files. 
 radc_cs <- read.xlsx(paste0(indir,"/dataset_886_cross-sectional_11-20-2025.xlsx"))
-radc_long <- read.xlsx(paste0(indir,"/dataset_886_long_11-20-2025.xlsx"))
+radc_long <- read.xlsx(paste0(indir,"/dataset_886_long_11-20-2025.xlsx")) # this is a chronologically ordered dataframe where data from each participant is already ordered from the earliest to the latest visit
 
 radc_use <- comTrait_br %>% 
   filter(Cohort == "ROSMAP") %>% 
@@ -51,7 +51,7 @@ radc_use <- comTrait_br %>%
               dplyr::select(projid, cogn_ep, age_at_visit) %>% #cogn_ep = episodic memory domain score
               group_by(projid) %>%
               filter(!is.na(cogn_ep)) %>% 
-              slice_tail() # take the latest available cogn_ep; 
+              slice_tail() # slice_tail() because the last data point per subject is the latest data; take the latest available cogn_ep; 
               )
 
 sum(is.na(radc_use$cogn_ep)) # 17 people without cogn_ep
