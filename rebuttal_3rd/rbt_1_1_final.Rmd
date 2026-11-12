@@ -187,11 +187,7 @@ modeling <- function(
   ### internal function: https://rdrr.io/cran/rsample/src/R/bootci.R#sym-pctl_single
    boostrap_ci_fn <- function(dat, times = 1000, alpha = 0.05, seed = 1){
     set.seed(seed)
-    boots <- rsample::bootstraps(
-      dat,
-      times = times,
-      strata = truth
-    )
+    boots <- rsample::bootstraps(dat, times = times, strata = truth)
 
     ## calculate all models within every same bootstrap
     boot_results <- boots %>%
@@ -199,36 +195,16 @@ modeling <- function(
         results = map(
           splits,
           function(split) {
-
             d <- analysis(split)
 
-            cov_results <- cal_metrics(
-              d,
-              prob_col = ".pred_prob_cov", class_col = ".pred_class_cov"
-            ) %>%
-              rename(.estimate_cov = .estimate)
+            cov_results <- cal_metrics(d, prob_col = ".pred_prob_cov", class_col = ".pred_class_cov") %>% dplyr::rename(.estimate_cov = .estimate)
+            full_results <- cal_metrics(d, prob_col = ".pred_prob_full", class_col = ".pred_class_full") %>% dplyr::rename(.estimate_full = .estimate)
+            gene_results <- cal_metrics(d, prob_col = ".pred_prob_gene", class_col = ".pred_class_gene") %>% dplyr::rename(.estimate_gene = .estimate)
 
-            full_results <- cal_metrics(
-              d,
-              prob_col = ".pred_prob_full", class_col = ".pred_class_full"
-            ) %>%
-              rename(.estimate_full = .estimate)
-            
-            gene_results <- cal_metrics(
-              d,
-              prob_col = ".pred_prob_gene", class_col = ".pred_class_gene"
-            ) %>%
-              rename(.estimate_gene = .estimate)
-
-            left_join(
-              cov_results,
-              full_results,
-              by = ".metric"
-            ) %>%
+            cov_results %>% 
+              left_join(full_results, by = ".metric") %>%
               left_join(gene_results, by = ".metric") %>% 
-              mutate(
-                delta_metric = .estimate_full - .estimate_cov
-              )
+              mutate(delta_metric = .estimate_full - .estimate_cov)
           }
         )
       ) %>%
@@ -239,54 +215,17 @@ modeling <- function(
     bootstrap_ci <- boot_results %>%
       group_by(.metric) %>%
       summarise(
+        cov_L95 = quantile(.estimate_cov, alpha/2, na.rm = TRUE),
+        cov_H95 = quantile(.estimate_cov, 1 - alpha/2, na.rm = TRUE),
 
-        cov_L95 = quantile(
-          .estimate_cov,
-          alpha/2,
-          na.rm = TRUE
-        ),
-
-        cov_H95 = quantile(
-          .estimate_cov,
-          1 - alpha/2,
-          na.rm = TRUE
-        ),
-
-        full_L95 = quantile(
-          .estimate_full,
-          alpha/2,
-          na.rm = TRUE
-        ),
-
-        full_H95 = quantile(
-          .estimate_full,
-          1 - alpha/2,
-          na.rm = TRUE
-        ),
+        full_L95 = quantile(.estimate_full, alpha/2, na.rm = TRUE),
+        full_H95 = quantile(.estimate_full, 1 - alpha/2, na.rm = TRUE),
         
-        gene_L95 = quantile(
-          .estimate_gene,
-          alpha/2,
-          na.rm = TRUE
-        ),
-        
-        gene_H95 = quantile(
-          .estimate_gene,
-          1 - alpha/2,
-          na.rm = TRUE
-        ),
+        gene_L95 = quantile(.estimate_gene, alpha/2, na.rm = TRUE),
+        gene_H95 = quantile(.estimate_gene, 1 - alpha/2, na.rm = TRUE),
 
-        delta_L95 = quantile(
-          delta_metric,
-          alpha/2,
-          na.rm = TRUE
-        ),
-
-        delta_H95 = quantile(
-          delta_metric,
-          1 - alpha/2,
-          na.rm = TRUE
-        ),
+        delta_L95 = quantile(delta_metric, alpha/2, na.rm = TRUE),
+        delta_H95 = quantile(delta_metric, 1 - alpha/2, na.rm = TRUE),
 
         .groups = "drop"
       )
