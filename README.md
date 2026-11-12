@@ -43,7 +43,7 @@ _If you use these codes in this Github, the following manuscript must be cited a
 `rbt_1_6.Rmd` :  This script addresses comment 6 about prediction analysis from reviewer 1.
 
 **rebuttal_3rd**: Scripts generated in response to the third round of reviewers' comments.\
-`rbt_1_1_final.Rmd` : This script addresses comment 1 about classification analysis from reviewer 1.\
+`rbt_1_1_final.Rmd` : This script addresses comment 1 about classification analysis from reviewer 1.
 
 Below summarizes the corresponding codes related to supplementary tables that contain analytical results:
 |        **Table**       |                                     **Codes**                                    |
