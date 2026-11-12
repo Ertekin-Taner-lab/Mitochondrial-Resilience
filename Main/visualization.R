@@ -437,7 +437,7 @@ dev.off()
 
 rm(mpbb, mpbb_df, METr_allNoNA, METr_all, fig2a, fig2b, design)
 
-# Please refer to rbt_1_1_new for Fig2.c
+# Please refer to /rebuttal_2nd/rbt_1_2.Rmd for Fig2.c
 
 # Fig.3 ----
 comRes <- readRDS(paste0(resids_dir, "/comRes.rds")) # from 1_CreateResids.R
@@ -578,7 +578,7 @@ dev.off() # these are originall Fig3b & c in the initial submission; now is Fig3
 rm(rrvgo_ls, go_p_df, lolliplot,lbl_genes, lbl_genes_count, go_genes, de, fig3b, fig3c)
 
 # Fig.3c ----
-## Please refer rbt_2_1_3_BF_TM.Rmd for Fig.3c
+## Please refer to /rebutta_3rd/rbt_1_1_final.Rmd for Fig.3c
 
 # Fig.4----
 ## Fig.4a
@@ -650,7 +650,7 @@ fig4a_assoc <- brain_nduf_deg %>%
 
 fig4a <- fig4a_wgcna+fig4a_assoc + plot_layout(widths = c(0.15,2))
 
-# Please refer rbt_1_1_new.Rmd for Fig.4b
+# Please refer /rebuttal_2nd/rbt_1_2.Rmd for Fig.4b
 
 ## Fig.4c
 nduf_prot <- read.xlsx("./indir/NDUF_NeuroPro.xlsx") # file that has brain regions & study in which NDUFs are significantly upregulated in controls 
@@ -720,7 +720,7 @@ fig4c <- mice_deg %>%
         plot.caption = element_text(size = 14, hjust = 0),
         strip.text = element_text(face="bold", size=14.5),
         strip.background = element_rect(colour = "black"),
-        text = element_text(family = "ArielMT")) # this is initially Fig.4c in the initial submission, now is Extended Data Fig.12
+        text = element_text(family = "ArielMT")) # this is initially Fig.4c in the initial submission, now is Extended Data Fig.15
 
 design = c(
   area(1,1,10,8),
@@ -1471,7 +1471,7 @@ dev.off()
 
 cairo_pdf(paste0(outdir,"/S5_GO.pdf"), width = 4, height = 8.26)
 go_anno_br
-dev.off() # originally extended data fig.4 in the initial submission now is extended data fig.6
+dev.off() # originally extended data fig.5 in the initial submission now is extended data fig.6
 
 # S7 ----
 # Please refer rebuttal/rbt_1_6.R for Extended Data Fig.7a
@@ -1511,7 +1511,7 @@ V(g1)$name <- M3hub2plot$gene_name[1:38]
 V(g1)$color <- case_when(V(g1)$name %in% nduf_bb$gene_name ~ "red",
                          TRUE~ "black")
 
-cairo_pdf(paste0(outdir,"/Fig3a.pdf"), width = 6, height =6, pointsize = 15) # originally Fig3a in the initial submission; now is Extended Fig.10a
+cairo_pdf(paste0(outdir,"/Fig3a.pdf"), width = 6, height =6, pointsize = 15) # originally Fig3a in the initial submission; now is Extended Fig.12a
 par(mar=c(0,0,1,0))
 plot(g1, edge.color = adjustcolor(palette[3], alpha.f = 0.25), edge.alpha = 0.25, edge.width=0.2, vertex.color = palette[3], vertex.label = V(g1)$name, vertex.label.dist = 1, vertex.label.degree = -pi/4, vertex.label.color = V(g1)$color, vertex.label.family="ArielMT", vertex.label.font = 3, vertex.frame.color = "black", layout = jitter(layoutCircle1), vertex.size = 10)
 title("Blood M3: Top 38 hub genes", line=0.2, family="ArielMT")
@@ -1520,10 +1520,11 @@ dev.off()
 rm(M3hub2plot, inModule, M3_TOM_blood, gA, gB)
 
 ## S12b ----
-# Please refer rebuttal/rbt_2_1_3_BF_TM.Rmd for Extended Data Fig.12b
+# Please refer rebuttal_3rd/rbt_1_1_final.Rmd for Extended Data Fig.12b
 
 ## S12d&e ----
-# Please refer rebuttal_2nd/rbt_1_6.Rmd for Extended Data Fig.12d&e
+# Please refer rebuttal_2nd/rbt_1_6.Rmd for Extended Data Fig.12d
+# Please refer rebuttal_3rd/rbt_1_1_final.Rmd for Extended Data Fig.12e
 
 # S13 & S14 & S16 ----
 # Please refer rebuttal/rbt_1_4_cbx_LM10.Rmd for Extended Data Fig.13a, Extended Data Fig.14b&c and Extended Data Fig.16
