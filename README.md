@@ -42,6 +42,9 @@ _If you use these codes in this Github, the following manuscript must be cited a
 `rbt_1_5.Rmd` :  This script addresses comment 5 about Combat harmonization from reviewer 1.\
 `rbt_1_6.Rmd` :  This script addresses comment 6 about prediction analysis from reviewer 1.
 
+**rebuttal_3rd**: Scripts generated in response to the third round of reviewers' comments.\
+`rbt_1_1_final.Rmd` : This script addresses comment 1 about classification analysis from reviewer 1.\
+
 Below summarizes the corresponding codes related to supplementary tables that contain analytical results:
 |        **Table**       |                                     **Codes**                                    |
 |:----------------------:|:--------------------------------------------------------------------------------:|
@@ -55,7 +58,7 @@ Below summarizes the corresponding codes related to supplementary tables that co
 | Supplementary Table 11 |                                `rebuttal/rbt_1_7.R`                               |
 | Supplementary Table 12 |                                 `4_nduf_assoc_de.R`                               |
 | Supplementary Table 13 |                             `rebuttal_2nd/rbt_1_4.Rmd`                           |
-| Supplementary Table 14 |                             `rebuttal_2nd/rbt_1_6.Rmd`                           |
+| Supplementary Table 14 |              `rebuttal_2nd/rbt_1_6.Rmd` & `rebuttal_3rd/rbt_1_1_final.Rmd`        |
 | Supplementary Table 15 |                                `rebuttal/rbt_1_3.R`                               |
 | Supplementary Table 16 | `rebuttal/rbt_1_5_run_cisQTL_NDUFs_021726.R`;<br>`rebuttal/rbt_1_5.Rmd` (MR section) |
 | Supplementary Table 19 |                            `2_bl_wgcna.R` & `3_br_wgcna.R`                       |
