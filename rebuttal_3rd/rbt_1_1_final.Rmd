@@ -418,7 +418,7 @@ modeling <- function(
       validation_ridge_full %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "ridge", covariate_only = FALSE),
       validation_ridge_gene %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "ridge", covariate_only = FALSE),
       validation_en_cov %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "en", covariate_only = TRUE),
-      validation_en_full %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "en", covariate_only = TRUE),
+      validation_en_full %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "en", covariate_only = FALSE),
       validation_en_gene %>% extract_fit_parsnip() %>% tidy() %>% mutate(model_type = "en", covariate_only = FALSE)
     )
     
@@ -872,8 +872,6 @@ dev.off() # this is extended data fig.12b
 Plot for NDUFA9, NDUFV1, NDUFB8.
 These are in Fig.3c and Extended Data Fig.12e
 ```{r LMDR no CL}
-load("/fslustre/labs/ext_tsai_wei_mayo_edu/ro1_resilience/Manuscript/Rebuttal_2nd/outdir/1_6/results.RData")
-
 genes <- c("NDUFA9", "NDUFV1", "NDUFB8")
 # helper function to create dataframe for plotting roc curves
 make_roc_data <- function(res_object, genes) {
